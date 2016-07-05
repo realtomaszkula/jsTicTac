@@ -33,27 +33,26 @@ var ticTac = {
   //   this.currentSign = (currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
   // },
 
-  drawBoard : function() {
-    // flatten arr
-    let board = [].concat(...this.board);
+  // drawBoard : function() {
+  //   // flatten arr
+  //   let board = [].concat(...this.board);
 
-    //fill with current content
-    board.forEach(function(content, index){
-      $('#' + (index + 1)).text(content);
-    });
+  //   //fill with current content
+  //   board.forEach(function(content, index){
+  //     $('#' + (index + 1)).text(content);
+  //   });
+  // },
+  //
+  isTheSameAsCurrentSign : function (element, index, array) {
+    return element == ticTac.currentSign;
   },
 
   isGameOver : function() {
     let board = this.board;
-    return board.forEach(function(row){
-      return row.every(function(sign){
-        return sign == this.currentSign;
-      });
-    });
+    return board[0].every(this.isTheSameAsCurrentSign);
+
   }
 };
-
-
 
 
 function updateBoard(){
@@ -76,6 +75,5 @@ $(document).ready(function(){
     let x = id[0];
     let y = id[1];
     ticTac.board[x][y] = ticTac.currentSign;
-    console.log(ticTac.board);
   });
 });
