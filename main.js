@@ -33,24 +33,32 @@ var ticTac = {
   //   this.currentSign = (currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
   // },
 
-  // drawBoard : function() {
-  //   // flatten arr
-  //   let board = [].concat(...this.board);
 
-  //   //fill with current content
-  //   board.forEach(function(content, index){
-  //     $('#' + (index + 1)).text(content);
-  //   });
-  // },
-  //
+  columnGameOver : function() {
+    let board = [].concat(...ticTac.board);
+    for (var i = 0; i < 3; i++){
+      if (board[i] && board[i+3] && board[i+6]) return true;
+    }
+    return false;
+  },
 
-  isGameOver : function() {
+  rowsGameOver : function() {
     let board = this.board;
-    return  board.some(function(row){
+    return board.some(function(row){
         return row.every(function (sign) {
           return sign == ticTac.currentSign;
       });
     });
+  },
+
+  diagonalGameOver : function() {
+    let board = this.board;
+    return ( board[0][0] == board[1][1] == board[2][2]) || (board[2][0] == board[1][1] == board[0][2]);
+
+  },
+
+  isGameOver : function() {
+    return (this.columnGameOver() || this.rowsGameOver() || this.diagonalGameOver());
   }
 };
 
@@ -68,6 +76,9 @@ $(document).ready(function(){
   fadeInBoard();
   updateBoard();
 
+   $('.board-container').on('click', function(event) {
+      console.log(event.target.id);
+   });
 
   $('.board-container').on('click', 'p', function(event){
     $(this).text(ticTac.currentSign);
