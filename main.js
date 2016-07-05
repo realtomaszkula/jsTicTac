@@ -17,9 +17,15 @@ function playIntro(){
       });
   });
 
-  // $('#intro-container').remove();
+}
+
+
+function drawBoard(){
+  $('.board-container').fadeIn('slow');
 }
 
 $(document).ready(function(){
   playIntro();
+  drawBoard();
+
 });
