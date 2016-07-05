@@ -47,10 +47,20 @@
     border-right: 2px solid #aaa;
     border-bottom: 2px solid #aaa;
     margin: 0; padding: 0;
+    position: relative;
+
 }
 
-.content {
-  height: 200px;
+.grid img {
+  /* resize img */
+  height: 100px;
+  width: auto;
+
+ /* center inside div*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .grid:last-child {
@@ -59,18 +69,8 @@
 
 .last-row .grid{
   border-bottom: none;
-
 }
 
-.content{
-  font-size: 50px;
-  text-align: center;
-  line-height: 200px;
-  height: 200px;
-  margin: 0;
-  padding: 0;
-
-}
 
 
 

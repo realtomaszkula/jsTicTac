@@ -12,6 +12,7 @@ function playIntro(){
           $('#hc-intro').show(showAnimation, { distance: distance }, duration, function(){
             $('#intro-container').fadeOut(hideDuration, function(){
               $('#intro-container').remove();
+              fadeInBoard();
             });
           });
       });
@@ -22,7 +23,7 @@ function playIntro(){
 var ticTac = {
   gameOver : false,
   currentSign : 'X',
-  player1 : { sign : 'X' },
+  player1 : { sign : '<' },
   player2 : { sign : 'O' },
   board : [['','',''],['','',''],['','','']],
 
@@ -84,7 +85,7 @@ $(document).ready(function(){
   // playIntro();
   fadeInBoard();
 
-  $('.board-container').on('click', 'p', function(event){
+  $('.board-container').on('click', 'div', function(event){
     $(this).text(ticTac.currentSign);
     updateBoard(event);
     if (ticTac.isGameOver()) gameOver();
