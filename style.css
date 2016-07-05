@@ -1,0 +1,28 @@
+#container {
+  width: 840px;
+  height: 840px;
+  margin: 0 auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#img-container{
+  margin-top: 250px;
+}
+
+#img-container .img-helper {
+  display: inline-block;
+  width: 33%;
+}
+
+#dt-intro, #hc-intro, #vs{
+  display: none;
+
+}
+
+#dt-intro, #hc-intro {
+
+  width: 250px;
+  height: auto;
+}
+
