@@ -34,27 +34,36 @@
 
 .board-container {
     display: none;
-    width: 80%;
-    height: 500px;
-    margin: 150px auto;
+    width: 604px;
+    height: 600px;
+    margin: 100px auto;
     background: white;
-    position: relative;
 }
-.board-container div {
+
+.grid{
     float: left;
-    width: 33.3%;
-    height: 33.3%;
-    border: 2px solid #aaa;
+    width: 200px;
+    height: 200px;
+    border-right: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
     margin: 0; padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 }
-.border-override {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: 5px solid white;
+
+.grid:last-child {
+  border-right: none;
 }
+
+.last-row .grid{
+  border-bottom: none;
+
+}
+
+.board-container div p{
+  font-size: 50px;
+  text-align: center;
+  line-height: 100px;
+  height: 100px;
+}
+
+
+
