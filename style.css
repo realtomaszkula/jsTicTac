@@ -6,23 +6,30 @@
   text-align: center;
 }
 
-#img-container{
+
+/* intro */
+#intro-container{
   margin-top: 250px;
 }
 
-#img-container .img-helper {
+#intro-container .img-helper {
   display: inline-block;
   width: 33%;
 }
 
 #dt-intro, #hc-intro, #vs{
   display: none;
-
 }
 
 #dt-intro, #hc-intro {
-
   width: 250px;
   height: auto;
 }
 
+#vs {
+  position: relative;
+  bottom: 100px;
+}
+
+
+/* game board */

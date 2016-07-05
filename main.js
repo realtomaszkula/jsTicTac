@@ -1,15 +1,26 @@
-$(document).ready(function(){
-  $('#dt-intro').show('bounce', { distance: 250 }, 2000, function(){
-      $('#vs').show('bounce', 2000, function(){
-        $('#hc-intro').show('bounce', { distance: 250 }, 2000);
+function playIntro(){
+  // show
+  let duration = 1000;
+  let distance = 250;
+  let showAnimation =  'bounce';
+
+  // hide
+  let hideAnimation = 'clip';
+  let hideDuration = 2000;
+
+  $('#dt-intro').show(showAnimation, { distance: distance }, duration, function(){
+      $('#vs').show(showAnimation, duration, function(){
+          $('#hc-intro').show(showAnimation, { distance: distance }, duration, function(){
+            $('#intro-container').hide(hideAnimation, hideDuration, function(){
+              $('#intro-container').remove();
+            });
+          });
       });
-    });
-  // $('#dt-intro').show(
-  //   'slide', { direction: 'down' }, 2000, function(){
-  //     $('#hc-intro').show(
-  //   'slide', { direction: 'up' }, 2000);
-  //   }
-  // );
+  });
 
+  // $('#intro-container').remove();
+}
 
+$(document).ready(function(){
+  playIntro();
 });
