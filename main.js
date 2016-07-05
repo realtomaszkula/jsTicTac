@@ -22,9 +22,9 @@ function playIntro(){
 
 var ticTac = {
   gameOver : false,
-  currentSign : 'X',
-  player1 : { sign : '<' },
-  player2 : { sign : 'O' },
+  currentSign : '<img src="images/hc-sign.jpg">',
+  player1 : { sign : '<img src="images/hc-sign.jpg">' },
+  player2 : { sign : '<img src="images/trump-sign.jpg">' },
   board : [['','',''],['','',''],['','','']],
 
   changeSign : function (){
@@ -85,8 +85,8 @@ $(document).ready(function(){
   // playIntro();
   fadeInBoard();
 
-  $('.board-container').on('click', 'div', function(event){
-    $(this).text(ticTac.currentSign);
+  $('.board-container').on('click', '.grid', function(event){
+    $(this).append(ticTac.currentSign);
     updateBoard(event);
     if (ticTac.isGameOver()) gameOver();
     ticTac.changeSign();
