@@ -49,6 +49,10 @@
     margin: 0; padding: 0;
 }
 
+.content {
+  height: 200px;
+}
+
 .grid:last-child {
   border-right: none;
 }
@@ -58,11 +62,14 @@
 
 }
 
-.board-container div p{
+.content{
   font-size: 50px;
   text-align: center;
-  line-height: 100px;
-  height: 100px;
+  line-height: 200px;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+
 }
 
 

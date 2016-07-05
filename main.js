@@ -22,22 +22,22 @@ function playIntro(){
 var ticTac = {
   gameOver : false,
   currentSign : 'X',
-
-  // player1 : "x",
-  // player2 : { sign : 'y' },
-  //   // board : [[1,2,3],[4,5,6],[7,8,9]],
-
+  player1 : { sign : 'X' },
+  player2 : { sign : 'O' },
   board : [['','',''],['','',''],['','','']],
 
-  // changeSign : function (){
-  //   this.currentSign = (currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
-  // },
+  changeSign : function (){
+    this.currentSign = (this.currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
+  },
 
+  isTheSameAsCurrentSign : function(sign) {
+    return ticTac.currentSign == sign;
+  },
 
   columnGameOver : function() {
     let board = [].concat(...ticTac.board);
     for (var i = 0; i < 3; i++){
-      if (board[i] && board[i+3] && board[i+6]) return true;
+      if ([board[i], board[i+3], board[i+6]].every(ticTac.isTheSameAsCurrentSign)) return true;
     }
     return false;
   },
@@ -45,16 +45,18 @@ var ticTac = {
   rowsGameOver : function() {
     let board = this.board;
     return board.some(function(row){
-        return row.every(function (sign) {
-          return sign == ticTac.currentSign;
-      });
+        return row.every(ticTac.isTheSameAsCurrentSign);
     });
   },
 
   diagonalGameOver : function() {
     let board = this.board;
-    return ( board[0][0] == board[1][1] == board[2][2]) || (board[2][0] == board[1][1] == board[0][2]);
+    let diagonalRight = Array.from([board[0][0], board[1][1], board[2][2]]);
+    let diagonalLeft = Array.from([board[2][0], board[1][1], board[0][2]]);
 
+    let right = diagonalRight.every(ticTac.isTheSameAsCurrentSign);
+    let left = diagonalLeft.every(ticTac.isTheSameAsCurrentSign);
+    return left || right;
   },
 
   isGameOver : function() {
@@ -63,8 +65,15 @@ var ticTac = {
 };
 
 
-function updateBoard(){
+function gameOver() {
+  alert("Game over!");
+}
 
+function updateBoard(event) {
+  let id = event.target.id;
+  let x = id[0];
+  let y = id[1];
+  ticTac.board[x][y] = ticTac.currentSign;
 }
 
 function fadeInBoard(){
@@ -74,17 +83,12 @@ function fadeInBoard(){
 $(document).ready(function(){
   // playIntro();
   fadeInBoard();
-  updateBoard();
-
-   $('.board-container').on('click', function(event) {
-      console.log(event.target.id);
-   });
 
   $('.board-container').on('click', 'p', function(event){
     $(this).text(ticTac.currentSign);
-    let id = event.target.id;
-    let x = id[0];
-    let y = id[1];
-    ticTac.board[x][y] = ticTac.currentSign;
+    updateBoard(event);
+    if (ticTac.isGameOver()) gameOver();
+    ticTac.changeSign();
+
   });
 });
