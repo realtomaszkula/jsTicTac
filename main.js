@@ -1,29 +1,3 @@
-
-var ticTac = {
-
-  board : [[1,2,3],[4,5,6],[7,8,9]],
-
-  // player1 : "x",
-  // player2 : { sign : 'y' },
-  // // board : [['','',''],['','',''],['','','']],
-  // currentSign : this.player2['sign'],
-
-  // changeSign : function (){
-  //   this.currentSign = (currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
-  // },
-
-  updateBoard : function() {
-    // flatten arr
-    let board = [].concat(...this.board);
-
-    //fill with current content
-    board.forEach(function(content, index){
-      $('#' + (index + 1)).text(content);
-    });
-  }
-};
-
-
 function playIntro(){
   // show
   let duration = 1000;
@@ -45,17 +19,63 @@ function playIntro(){
 
 }
 
-function drawBoard(){
+var ticTac = {
+  gameOver : false,
+  currentSign : 'X',
+
+  // player1 : "x",
+  // player2 : { sign : 'y' },
+  //   // board : [[1,2,3],[4,5,6],[7,8,9]],
+
+  board : [['','',''],['','',''],['','','']],
+
+  // changeSign : function (){
+  //   this.currentSign = (currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
+  // },
+
+  drawBoard : function() {
+    // flatten arr
+    let board = [].concat(...this.board);
+
+    //fill with current content
+    board.forEach(function(content, index){
+      $('#' + (index + 1)).text(content);
+    });
+  },
+
+  isGameOver : function() {
+    let board = this.board;
+    return board.forEach(function(row){
+      return row.every(function(sign){
+        return sign == this.currentSign;
+      });
+    });
+  }
+};
+
+
+
+
+function updateBoard(){
+
+}
+
+function fadeInBoard(){
   $('.board-container').fadeIn('slow');
 }
 
 $(document).ready(function(){
   // playIntro();
-  drawBoard();
-  ticTac.updateBoard();
+  fadeInBoard();
+  updateBoard();
 
 
-  $('.board-container').on('click', 'p', function(){
-    console.log('test');
+  $('.board-container').on('click', 'p', function(event){
+    $(this).text(ticTac.currentSign);
+    let id = event.target.id;
+    let x = id[0];
+    let y = id[1];
+    ticTac.board[x][y] = ticTac.currentSign;
+    console.log(ticTac.board);
   });
 });
