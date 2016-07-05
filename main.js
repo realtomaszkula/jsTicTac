@@ -43,14 +43,14 @@ var ticTac = {
   //   });
   // },
   //
-  isTheSameAsCurrentSign : function (element, index, array) {
-    return element == ticTac.currentSign;
-  },
 
   isGameOver : function() {
     let board = this.board;
-    return board[0].every(this.isTheSameAsCurrentSign);
-
+    return  board.some(function(row){
+        return row.every(function (sign) {
+          return sign == ticTac.currentSign;
+      });
+    });
   }
 };
 
