@@ -25,20 +25,27 @@ function playIntro(){
   });
 
 }
+function Player(name, sign) {
+  this.name = name;
+  this.sign = sign;
+}
+
+var donaldTrump = new Player('Donald Trump', '<img src="images/trump-sign.jpg">');
+var hillaryClinton = new Player('Hillary Clinton', '<img src="images/hc-sign.jpg">');
 
 var ticTac = {
-  gameOver : false,
-  currentSign : '<img src="images/hc-sign.jpg">',
-  player1 : { sign : '<img src="images/hc-sign.jpg">' },
-  player2 : { sign : '<img src="images/trump-sign.jpg">' },
+  playerOne : donaldTrump,
+  playerTwo : hillaryClinton,
+  currentPlayer : donaldTrump,
+
   board : [['','',''],['','',''],['','','']],
 
-  changeSign : function (){
-    this.currentSign = (this.currentSign == this.player1.sign) ? this.player2.sign : this.player1.sign;
+  changeTurn : function (){
+    this.currentPlayer = (this.currentPlayer == this.playerOne) ? this.playerTwo : this.playerOne;
   },
 
   isTheSameAsCurrentSign : function(sign) {
-    return ticTac.currentSign == sign;
+    return ticTac.currentPlayer.sign == sign;
   },
 
   columnGameOver : function() {
@@ -73,14 +80,14 @@ var ticTac = {
 
 
 function gameOver() {
-  alert("Game over!");
+  alert("Game over! " + ticTac.currentPlayer.name + ' wins.');
 }
 
 function updateBoard(event) {
   let id = event.target.id;
   let x = id[0];
   let y = id[1];
-  ticTac.board[x][y] = ticTac.currentSign;
+  ticTac.board[x][y] = ticTac.currentPlayer.sign;
 }
 
 function fadeInBoard(){
@@ -92,10 +99,9 @@ $(document).ready(function(){
   fadeInBoard();
 
   $('.board-container').on('click', '.grid', function(event){
-    $(this).append(ticTac.currentSign);
+    $(this).append(ticTac.currentPlayer.sign);
     updateBoard(event);
     if (ticTac.isGameOver()) gameOver();
-    ticTac.changeSign();
-
+    ticTac.changeTurn();
   });
 });
