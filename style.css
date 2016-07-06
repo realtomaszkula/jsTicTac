@@ -6,7 +6,6 @@
   height: 840px;
   margin: 0 auto;
   text-align: center;
-  position: relative;
 }
 
 
@@ -19,15 +18,12 @@
   display: none;
 }
 
-#dt-intro, #hc-intro {
+#dt-intro, #hc-intro, #vs {
   width: 250px;
   height: auto;
 }
 
-#vs {
-  position: relative;
-  bottom: 100px;
-}
+
 
 
 /* game board */
@@ -39,6 +35,9 @@
     margin: 100px auto;
     background: white;
 }
+
+
+
 
 .grid{
     float: left;
@@ -73,4 +72,15 @@
 
 
 
+/* pepe */
 
+.pepe-wrapper {
+  text-align: center
+
+}
+
+.pepe-wrapper img {
+  margin: 100px auto;
+  display: none;
+
+}

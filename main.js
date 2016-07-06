@@ -9,7 +9,7 @@ function playIntro(){
 
   $('body').append('<section id="intro-container">' +
       '<div class="img-helper"><img src="images/dt-intro.jpg" id="dt-intro"></div>' +
-      '<div class="img-helper"><p id="vs">VS</p></div>' +
+      '<div class="img-helper"><img src="images/vs.png" id="vs"></div>' +
       '<div class="img-helper"><img src="images/hc-intro.png" id="hc-intro"></div>' +
       '</section>)');
 
@@ -79,10 +79,6 @@ var ticTac = {
 };
 
 
-function gameOver() {
-  alert("Game over! " + ticTac.currentPlayer.name + ' wins.');
-}
-
 function updateBoard(event) {
   let id = event.target.id;
   let x = id[0];
@@ -94,11 +90,28 @@ function fadeInBoard(){
   $('.board-container').fadeIn('slow');
 }
 
+function gameOver() {
+  // alert("Game over! " + ticTac.currentPlayer.name + ' wins.');
+  console.log(ticTac.currentPlayer.name);
+  $('.board-container').effect('shake', 1000).effect('explode', 1000, function(){
+        appendPepe();
+  });
+
+}
+
+function appendPepe() {
+  let pepe = '<div class="pepe-wrapper"><img src="images/trump-pepe' + Math.floor((Math.random() * (4-1) +  1)) + '.png" id="pepe"></div>';
+  $('body').append(pepe);
+  $('#pepe').effect('slide', 'slow');
+
+}
+
 $(document).ready(function(){
-  // playIntro();
-  fadeInBoard();
+  playIntro();
+  // fadeInBoard();
 
   $('.board-container').on('click', '.grid', function(event){
+    if ($(this).children().length > 0) return;
     $(this).append(ticTac.currentPlayer.sign);
     updateBoard(event);
     if (ticTac.isGameOver()) gameOver();
