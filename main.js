@@ -1,11 +1,17 @@
 function playIntro(){
   // show
-  let duration = 1000;
+  let duration = 2000;
   let distance = 250;
   let showAnimation =  'bounce';
 
   // hide
   let hideDuration = 2000;
+
+  $('body').append('<section id="intro-container">' +
+      '<div class="img-helper"><img src="images/dt-intro.jpg" id="dt-intro"></div>' +
+      '<div class="img-helper"><p id="vs">VS</p></div>' +
+      '<div class="img-helper"><img src="images/hc-intro.png" id="hc-intro"></div>' +
+      '</section>)');
 
   $('#dt-intro').show(showAnimation, { distance: distance }, duration, function(){
       $('#vs').show(showAnimation, duration, function(){
